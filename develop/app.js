@@ -9,7 +9,6 @@ import routes from './config/appRoutes.jsx';
 import configureStore from './store/root.store';
 import appHistory from './config/appHistory';
 
-
 const initialState = {};
 const store = configureStore(initialState);
 

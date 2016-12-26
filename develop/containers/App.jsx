@@ -1,9 +1,17 @@
 import React, { PropTypes } from 'react';
+//Material UI
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+var injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 
 const App = (props) => (
-    <div id="app-view">
-        {props.children}
-    </div>
+    <MuiThemeProvider >
+        <div id="app-view">
+            {props.children}
+        </div>
+    </MuiThemeProvider>
 );
 
 App.propTypes = {

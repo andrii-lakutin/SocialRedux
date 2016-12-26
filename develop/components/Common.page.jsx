@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class CommonPage extends Component {
     render() {
@@ -8,7 +10,12 @@ class CommonPage extends Component {
             <div
               onClick={handleCommonAction}
             >
-                Common page
+                <h1>Login Form</h1>
+                <RaisedButton 
+                    label="First time here?"
+                    backgroundColor="orange"
+                    labelColor="white"
+                />
             </div>
         );
     }

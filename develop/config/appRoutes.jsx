@@ -2,13 +2,16 @@ import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 
 import App from '../containers/App.jsx';
-import Common from '../containers/Common.container.jsx';
-
+import Register from '../containers/Register.container.jsx';
+import Login from '../containers/Login.container.jsx';
+import PersonalPage from '../containers/PersonalPage.container.jsx';
 
 export default (
     <Route path="/" component={App}>
-        <IndexRedirect to="common" />
+        <IndexRedirect to="login" />
 
-        <Route path="common" component={Common} />
+        <Route path="login" component={Login} />
+        <Route path="register" component={Register} />
+        <Route path="personal" component={PersonalPage} />
     </Route>
 );
