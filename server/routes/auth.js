@@ -54,11 +54,6 @@ router.route('/login')
     });
   });
 
-router.route('/getCSRFToken')
-  .get(function (req, res) {
-    res.status(200).json({ csrfToken: req.csrfToken() });
-  });
-
 router.route('/logout')
   .get(function (req, res) {
     req.session.reset();

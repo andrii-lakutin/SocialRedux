@@ -1,7 +1,4 @@
-import { store } from "../app";
-
 const asyncValidate = (values) => {
-    let currentState = store.getState();
     return fetch("/auth/register",
         {
             method: 'POST',
@@ -14,7 +11,6 @@ const asyncValidate = (values) => {
                 "lastName" : values.lastName,
                 "email": values.email,
                 "password": values.password,
-                "_csrf": currentState.authentication.registrationCsrfToken,
                 "readOnly" : true
             })
         })

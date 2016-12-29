@@ -39,8 +39,6 @@ app.use(sessions({
   // ephemeral: true //delete cookie when the browser is closed
 }));
 
-app.use(csrf());
-
 app.use(function (req, res, next) {
   if (req.session && req.session.user) {
     User.findOne({ email: req.session.user.email }, function (err, user) {

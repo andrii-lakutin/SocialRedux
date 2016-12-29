@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { SubmissionError } from 'redux-form';
 
-import { registration, getRegistrationSCRFToken } from '../actions/server.actions';
+import { registration } from '../actions/server.actions';
 
 import RegistrationForm from '../components/RegistrationForm.page.jsx';
 
@@ -24,12 +24,11 @@ class Register extends Component {
             email : values.email,
             password : values.password,
         }
-        data._csrf = this.props.csrfToken;
         this.props.handleSubmitForm('/auth/register', data);
     }
 
     render() {
-        const { handleSubmitForm, getCSRFToken, csrfToken, regForm } = this.props;
+        const { handleSubmitForm, regForm } = this.props;
         return (
             <RegistrationForm
                 handleSubmitForm={handleSubmitForm}
@@ -43,22 +42,18 @@ class Register extends Component {
 
 Register.propTypes = {
     handleSubmitForm: PropTypes.func,
-    getCSRFToken : PropTypes.func,
-    csrfToken : PropTypes.string,
     regForm : PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({
     ...ownProps,
     store: state,
-    csrfToken: state.authentication.registrationCsrfToken,
     regForm : state.form
 });
 
 const mapDispatchToProps = (dispatch, ownPorps) => ({
     ...ownPorps,
     handleSubmitForm: bindActionCreators(registration, dispatch),
-    getCSRFToken : bindActionCreators(getRegistrationSCRFToken, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

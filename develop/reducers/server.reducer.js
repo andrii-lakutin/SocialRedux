@@ -19,8 +19,6 @@ let initialState = {
         }
     },
     logoutTrigger: false,
-    loginCsrfToken: undefined,
-    registrationCsrfToken: undefined
 }
 
 export default function authentication(state = initialState, action) {
@@ -123,37 +121,6 @@ export default function authentication(state = initialState, action) {
                     }
                 }
             };
-        case 'REGISTRATION_CSRF_HAS_ERRORED':
-            return {
-                ...state,
-                hasErrored: action.hasErrored
-            };
-        case 'REGISTRATION_CSRF_IS_LOADING':
-            return {
-                ...state,
-                isLoading: action.isLoading
-            };
-        case 'REGISTRATION_CSRF_FETCH_SUCCESS':
-            return {
-                ...state,
-                registrationCsrfToken: action.response.csrfToken
-            };
-        case 'LOGIN_CSRF_HAS_ERRORED':
-            return {
-                ...state,
-                hasErrored: action.hasErrored
-            };
-        case 'LOGIN_CSRF_IS_LOADING':
-            return {
-                ...state,
-                isLoading: action.isLoading
-            };
-        case 'LOGIN_CSRF_FETCH_SUCCESS':
-            return {
-                ...state,
-                loginCsrfToken: action.response.csrfToken
-            };
-
         case 'RESET_REGISTRATION':
             return {
                 ...state,

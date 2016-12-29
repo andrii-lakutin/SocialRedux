@@ -82,48 +82,6 @@ function sessionsHasErrored(bool) {
   }
 };
 
-function csrfRegistrationIsLoading(bool) {
-  return {
-    type: "REGISTRATION_CSRF_IS_LOADING",
-    isLoading: bool
-  }
-};
-
-function csrfRegistrationFetchSuccess(response) {
-  return {
-    type: "REGISTRATION_CSRF_FETCH_SUCCESS",
-    response
-  }
-};
-
-function csrfRegistrationHasErrored(bool) {
-  return {
-    type: "REGISTRATION_CSRF_HAS_ERRORED",
-    hasErrored: bool
-  }
-};
-
-function csrfLoginIsLoading(bool) {
-  return {
-    type: "LOGIN_CSRF_IS_LOADING",
-    isLoading: bool
-  }
-};
-
-function csrfLoginFetchSuccess(response) {
-  return {
-    type: "LOGIN_CSRF_FETCH_SUCCESS",
-    response
-  }
-};
-
-function csrfLoginHasErrored(bool) {
-  return {
-    type: "LOGIN_CSRF_HAS_ERRORED",
-    hasErrored: bool
-  }
-};
-
 function resetRegistration() {
   return {
     type: "RESET_REGISTRATION"
@@ -248,51 +206,5 @@ export function logout(url) {
       .then((items) => dispatch(logoutFetchSuccess(items)))
       .then(() => dispatch(resetLogoutTrigger()))
       .catch((err) => dispatch(logoutHasErrored(err)));
-  };
-}
-
-export function getRegistrationSCRFToken(url) {
-  return (dispatch) => {
-    dispatch(csrfRegistrationIsLoading(true));
-
-    fetch(url, {
-      credentials: 'include',
-      mode: 'no-cors'
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-
-        dispatch(csrfRegistrationIsLoading(false));
-
-        return response;
-      })
-      .then((response) => response.json())
-      .then((items) => dispatch(csrfRegistrationFetchSuccess(items)))
-      .catch((err) => dispatch(csrfRegistrationHasErrored(err)));
-  };
-}
-
-export function getLoginSCRFToken(url) {
-  return (dispatch) => {
-    dispatch(csrfLoginIsLoading(true));
-
-    fetch(url, {
-      credentials: 'include',
-      mode: 'no-cors'
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-
-        dispatch(csrfLoginIsLoading(false));
-
-        return response;
-      })
-      .then((response) => response.json())
-      .then((items) => dispatch(csrfLoginFetchSuccess(items)))
-      .catch((err) => dispatch(csrfLoginHasErrored(err)));
   };
 }

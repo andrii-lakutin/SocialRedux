@@ -13,10 +13,6 @@ const minLength = value => (value.length < 9) ? 'Password must have at least 8 c
 
 class RegistrationForm extends Component {
 
-    componentDidMount() {
-        this.props.getCSRFToken('/auth/getCSRFToken');
-    }
-
     render() {
         const { pristine, submitting, handleSubmit } = this.props;
         return (
@@ -42,8 +38,6 @@ class RegistrationForm extends Component {
 
 RegistrationForm.propTypes = {
     handleSubmitForm: PropTypes.func,
-    getCSRFToken: PropTypes.func,
-    csrfToken: PropTypes.string,
 };
 
 RegistrationForm = reduxForm({
