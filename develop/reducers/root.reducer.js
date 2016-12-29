@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-import common from './common.reducer';
 import authentication from './server.reducer';
+import data from './data.reducer';
 
 const rootReducer = combineReducers({
-    common,
-    authentication
+    authentication,
+    data,
+    form: formReducer
 });
 
 export default rootReducer;

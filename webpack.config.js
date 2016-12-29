@@ -28,7 +28,7 @@ module.exports = {
             { test: /\.svg/, loader: 'url?limit=50000&mimetype=image/svg+xml' },
             { test: /\.(woff|woff2|ttf|eot)/, loader: 'url?limit=500000' },
 
-            { test: /\.jsx$/, loader: 'react-hot!babel', exclude: [/node_modules/, /public/] },
+            { test: /\.jsx$/, loader: 'babel-loader', exclude: [/node_modules/, /public/] },
             { test: /\.js$/, loader: 'babel', exclude: [/node_modules/, /public/] },
 
             { test: /\.json$/, loader: 'json' },

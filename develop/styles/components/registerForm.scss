@@ -1,0 +1,30 @@
+.RegisterFormComponent{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        // overriding Material UI inputs to see errors (no other way)
+        & > div:nth-child(1) {
+            margin-bottom: 10px;
+        }
+        & > div:nth-child(2) {
+            margin-bottom: 10px;
+        }
+        & > div:nth-child(3) {
+            margin-bottom: 10px;
+        }
+        & > div:nth-child(4) {
+            margin-bottom: 10px;
+        }
+        & > div:last-child {
+            margin-top: 30px;
+        }
+    }
+}

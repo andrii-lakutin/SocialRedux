@@ -124,6 +124,17 @@ function csrfLoginHasErrored(bool) {
   }
 };
 
+function resetRegistration() {
+  return {
+    type: "RESET_REGISTRATION"
+  }
+};
+
+function resetLogoutTrigger() {
+  return {
+    type: "RESET_LOGOUT_TRIGGER"
+  }
+};
 
 export function registration(url, data) {
   return (dispatch) => {
@@ -137,11 +148,12 @@ export function registration(url, data) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "firstName": data[0],
-          "lastName": data[1],
-          "email": data[2],
-          "password": data[3],
-          "_csrf" : data._csrf
+          "firstName": data.firstName,
+          "lastName": data.lastName,
+          "email": data.email,
+          "password": data.password,
+          "_csrf": data._csrf,
+          "readonly": false
         })
       })
       .then((response) => {
@@ -154,6 +166,7 @@ export function registration(url, data) {
       })
       .then((response) => response.json())
       .then((items) => dispatch(registrationFetchSuccess(items)))
+      .then(() => dispatch(resetRegistration()))
       .catch((err) => dispatch(registrationHasErrored(err)));
   };
 }
@@ -171,9 +184,9 @@ export function login(url, data) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "email": data[0],
-          "password": data[1],
-          "_csrf" : data._csrf
+          "email": data.email,
+          "password": data.password,
+          "_csrf": data._csrf
         })
       })
       .then((response) => {
@@ -187,7 +200,7 @@ export function login(url, data) {
       })
       .then((response) => response.json())
       .then((items) => dispatch(loginFetchSuccess(items)))
-      .catch((err) => dispatch(loginHasErrored(err)));
+      .catch((err) => dispatch(loginHasErrored(err.message)));
   };
 }
 
@@ -233,6 +246,7 @@ export function logout(url) {
       })
       .then((response) => response.json())
       .then((items) => dispatch(logoutFetchSuccess(items)))
+      .then(() => dispatch(resetLogoutTrigger()))
       .catch((err) => dispatch(logoutHasErrored(err)));
   };
 }

@@ -1,64 +1,70 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
+
+import Header from "../components/Header.jsx";
 
 import { isInSession, logout } from '../actions/server.actions';
+import { getPersonalInfo } from "../actions/data.actions";
 
 class PersonalPage extends Component {
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.checkSessions('/users/personal');
+        this.props.loadInfo(`/users/personal/${this.props.params.userId}`);
     }
 
-    componentDidUpdate(){
-        //If user logout - redirect. Or, if user try come to this URL without login - redirect too.
-        let loginStatus = this.props.store.authentication.loginResponse.status;
-        if(!loginStatus){
+    componentDidUpdate() {
+        let logoutTrigger = this.props.store.authentication.logoutTrigger;
+        if (logoutTrigger) {
             browserHistory.push('/login');
         }
     }
 
-    logout(){
+    logout() {
         this.props.handleLogout('/auth/logout');
     }
 
+    login() {
+        browserHistory.push('/login');
+    }
+
     render() {
-        const { user } = this.props;
+        const { user, currentPage } = this.props;
+
         return (
-            <div>
-                <h1>Wellcome Back!</h1>
-                <p>{user.firstName}</p>
-                <p>{user.lastName}</p>
-                <p>{user.email}</p>
-                <RaisedButton 
-                        label="Logout"
-                        backgroundColor="orange"
-                        labelColor="white"
-                        onClick={this.logout.bind(this)}
-                    />
+            <div className="PersonalPageContainer">
+                {user._id === currentPage.owner ? 
+                    <Header currentPage={currentPage} handleLogout={this.logout.bind(this)} isLogin={true}/> : 
+                    <Header currentPage={currentPage} handleLogin ={this.login.bind(this)}  isLogin={false}/>}
+                <h1>{user.firstName}</h1>
+                <h2>{user.lastName}</h2>
             </div>
         );
+
     }
 }
 
 PersonalPage.propTypes = {
     checkSessions: PropTypes.func,
-    handleLogout: PropTypes.func
+    handleLogout: PropTypes.func,
+    handleLogin: PropTypes.func,
+    loadInfo: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => ({
     ...ownProps,
     store: state,
-    user: state.authentication.sessionsResponse.user
+    user: state.authentication.sessionsResponse.user,
+    currentPage: state.data.personalInfo.user
 });
 
 const mapDispatchToProps = (dispatch, ownPorps) => ({
     ...ownPorps,
     checkSessions: bindActionCreators(isInSession, dispatch),
-    handleLogout : bindActionCreators(logout, dispatch)
+    loadInfo: bindActionCreators(getPersonalInfo, dispatch),
+    handleLogout: bindActionCreators(logout, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalPage);

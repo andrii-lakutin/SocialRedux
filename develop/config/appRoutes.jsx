@@ -12,6 +12,6 @@ export default (
 
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
-        <Route path="personal" component={PersonalPage} />
+        <Route path="personal/:userId" component={PersonalPage}/>
     </Route>
 );

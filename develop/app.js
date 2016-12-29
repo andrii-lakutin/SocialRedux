@@ -9,8 +9,10 @@ import routes from './config/appRoutes.jsx';
 import configureStore from './store/root.store';
 import appHistory from './config/appHistory';
 
+import './styles/main.scss';
+
 const initialState = {};
-const store = configureStore(initialState);
+export const store = configureStore(initialState);
 
 
 ReactDOM.render(
@@ -20,4 +22,3 @@ ReactDOM.render(
 
     document.getElementById('react-view')
 );
-

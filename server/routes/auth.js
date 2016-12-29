@@ -14,18 +14,28 @@ router.route('/register')
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     });
-    user.save(function (err) {
-      if (err) {
-        var error = 'Something bad happened! Try again!';
-        if (err.code === 11000) {
-          error = 'That email is already taken, try another';
+    if (!req.body.readOnly) {
+      user.save(function (err) {
+        if (err) {
+          var error = 'Something bad happened! Try again!';
+          if (err.code === 11000) {
+            error = 'That email is already taken, try another';
+          }
+          res.statusMessage = error;
+          res.status(422).json(error);
+        } else {
+          res.status(200).json({ status: "Success!" });
         }
-        res.statusMessage = error;
-        res.status(422).json(error);
-      } else {
-        res.status(200).json({ status: "Success!" });
-      }
-    });
+      });
+    } else {
+      User.findOne({ email: req.body.email }, function (err, user) {
+        if (!user) {
+          res.status(200).json({ status: "Success!" });
+        } else {
+          createError("That email is already taken, try another", 422, res);  
+        }
+      });
+    }
   });
 
 router.route('/login')

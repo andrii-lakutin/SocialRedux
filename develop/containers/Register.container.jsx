@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import { SubmissionError } from 'redux-form';
 
 import { registration, getRegistrationSCRFToken } from '../actions/server.actions';
 
@@ -16,14 +17,25 @@ class Register extends Component {
         }
     }
 
-    render() {
-        const { handleSubmitForm, getCSRFToken, csrfToken } = this.props;
+    submit(values) {
+        let data = {
+            firstName : values.firstName,
+            lastName  : values.lastName,
+            email : values.email,
+            password : values.password,
+        }
+        data._csrf = this.props.csrfToken;
+        this.props.handleSubmitForm('/auth/register', data);
+    }
 
+    render() {
+        const { handleSubmitForm, getCSRFToken, csrfToken, regForm } = this.props;
         return (
             <RegistrationForm
                 handleSubmitForm={handleSubmitForm}
                 getCSRFToken={getCSRFToken}
-                csrfToken={csrfToken}
+                regForm={regForm}
+                onSubmit={this.submit.bind(this)}
             />
         );
     }
@@ -31,13 +43,16 @@ class Register extends Component {
 
 Register.propTypes = {
     handleSubmitForm: PropTypes.func,
-    getCSRFToken : PropTypes.func
+    getCSRFToken : PropTypes.func,
+    csrfToken : PropTypes.string,
+    regForm : PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({
     ...ownProps,
     store: state,
-    csrfToken: state.authentication.registrationCsrfToken
+    csrfToken: state.authentication.registrationCsrfToken,
+    regForm : state.form
 });
 
 const mapDispatchToProps = (dispatch, ownPorps) => ({
