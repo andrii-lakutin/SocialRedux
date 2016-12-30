@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 
 import Header from "../components/Header.jsx";
+import BigImage from "../components/BigImage.jsx";
+import Avatar from "../components/Avatar.jsx";
+import PersonalInfo from "../components/PersonalInfo.jsx";
 
 import { isInSession, logout } from '../actions/server.actions';
 import { getPersonalInfo } from "../actions/data.actions";
@@ -38,8 +41,9 @@ class PersonalPage extends Component {
                 {user._id === currentPage.owner ? 
                     <Header currentPage={currentPage} handleLogout={this.logout.bind(this)} isLogin={true}/> : 
                     <Header currentPage={currentPage} handleLogin ={this.login.bind(this)}  isLogin={false}/>}
-                <h1>{user.firstName}</h1>
-                <h2>{user.lastName}</h2>
+                <BigImage url={currentPage.headerUrl}/>  
+                <Avatar   url={currentPage.avatarUrl}/>   
+                <PersonalInfo info={currentPage}/>
             </div>
         );
 
