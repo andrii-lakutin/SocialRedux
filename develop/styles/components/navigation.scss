@@ -1,0 +1,18 @@
+.NavigationComponent{
+    flex-grow: 1;
+    button:nth-child(1){
+        svg{
+            fill: #673AB7 !important;
+        }
+    }    
+    button:nth-child(2){
+        svg{
+            fill: #4CAF50 !important;
+        }
+    }  
+    button:nth-child(3){
+        svg{
+            fill: #FF5722 !important;
+        }
+    }  
+}

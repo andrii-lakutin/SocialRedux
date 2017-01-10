@@ -29,3 +29,81 @@ export function getPersonalInfo(url) {
       .catch((err) => dispatch(getPersonalInfoHasErrored(err)));
   };
 }
+
+function personalChangeSuccess(info) {
+  return {
+    type: "PERSONAL_CHANGE_SUCCESS",
+    info
+  }
+};
+
+function personalChangeHasErrored(err) {
+  return {
+    type: "PERSONAL_CHANGE_HAS_ERRORED",
+    hasErrored: err
+  }
+};
+
+export function personalChange(field, newValue, currentPageOwner){
+    return (dispatch) => {
+    fetch(`/users/personal/${currentPageOwner}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "field": field,
+          "newValue": newValue,
+        })
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((response) => dispatch(personalChangeSuccess(response)))
+      .catch((err) => dispatch(personalChangeHasErrored(err)));
+  };
+}
+
+function submitPostMsgSuccess(info) {
+  return {
+    type: "SUBMIT_POST_MSG_SUCCESS",
+    info
+  }
+};
+
+function submitPostMsgHasErrored(err) {
+  return {
+    type: "SUBMIT_POST_MSG_HAS_ERRORED",
+    hasErrored: err
+  }
+};
+
+export function submitPostMsg(msg, from, fullName){
+  return (dispatch) => {
+    fetch(`/posts/user/${from}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          msg,
+          fullName
+        })
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((response) => dispatch(submitPostMsgSuccess(response)))
+      .catch((err) => dispatch(submitPostMsgHasErrored(err)));
+  };
+}

@@ -1,0 +1,13 @@
+.PostCreatorComponent{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 40px;
+    form{
+        display: flex;
+        flex-direction: column;
+        padding: 35px;
+        .submitBtn{
+            align-self: flex-end;
+        }
+    }
+}

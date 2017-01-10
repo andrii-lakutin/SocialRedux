@@ -1,4 +1,11 @@
 .PersonalPageContainer{
-    height: 100vh;
     background-color: rgba(242, 255, 253, .8);
+    .PageContent{
+        display: flex;
+    }
+    .AvatarInfoColumn{
+        max-width: 280px;
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -15,7 +15,8 @@ var PersonalPage = mongoose.model('PersonalPage', new Schema({
     skype: String,
     avatarUrl: String,
     headerUrl: String,
-    owner: String,
+    owner: {type: String, unique: true},
+    posts: [], // add schema of post
     friends: [String]
 }));
 

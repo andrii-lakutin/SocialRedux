@@ -110,7 +110,6 @@ export function registration(url, data) {
           "lastName": data.lastName,
           "email": data.email,
           "password": data.password,
-          "_csrf": data._csrf,
           "readonly": false
         })
       })
@@ -144,7 +143,6 @@ export function login(url, data) {
         body: JSON.stringify({
           "email": data.email,
           "password": data.password,
-          "_csrf": data._csrf
         })
       })
       .then((response) => {

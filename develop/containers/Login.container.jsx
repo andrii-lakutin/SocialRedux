@@ -28,13 +28,12 @@ class Login extends Component {
     }
 
     render() {
-        const { handleSubmitForm, logForm } = this.props;
+        const { logForm } = this.props;
 
         return (
             <div>
-                <LoginForm handleSubmitForm={handleSubmitForm}
-                    logForm={logForm}
-                    onSubmit={this.submit.bind(this)} />
+                <LoginForm logForm={logForm}
+                           onSubmit={this.submit.bind(this)} />
             </div>
         );
     }

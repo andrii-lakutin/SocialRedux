@@ -28,11 +28,9 @@ class Register extends Component {
     }
 
     render() {
-        const { handleSubmitForm, regForm } = this.props;
+        const { regForm } = this.props;
         return (
-            <RegistrationForm
-                handleSubmitForm={handleSubmitForm}
-                getCSRFToken={getCSRFToken}
+            <RegistrationForm    
                 regForm={regForm}
                 onSubmit={this.submit.bind(this)}
             />

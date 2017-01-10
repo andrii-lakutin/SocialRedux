@@ -11,6 +11,7 @@ import User from "./schemas/user";
 //routes
 import auth from './routes/auth';
 import users from './routes/users';
+import posts from './routes/posts';
 
 import createError from './shared/createError';
 
@@ -46,7 +47,7 @@ app.use(function (req, res, next) {
         req.user = user;
         req.user.password = "Secure";
         req.session.user = req.user;
-      }
+      } 
       next();
     });
   } else {
@@ -56,6 +57,7 @@ app.use(function (req, res, next) {
 
 app.use('/auth', auth);
 app.use('/users', users);
+app.use('/posts', posts);
 //FALLBACK MUST BE AT THE BOTTOM. Because we use another GET requests.
 app.use(fallback('index.html', {root}));
 

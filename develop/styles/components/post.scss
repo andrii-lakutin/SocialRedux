@@ -1,0 +1,37 @@
+.PostComponent{
+    width: 80%;
+    background: white;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .date{
+        color: gray;
+        padding: 15px;
+    }
+    .msg{
+        flex-grow: 1;
+        padding: 20px;
+        font-size: 30px;
+        line-height: 40px;
+        word-break: break-all;
+    }
+    .like{
+        font-size: 15px;
+        padding: 5px;
+        display: flex;
+         .heart{
+            cursor: pointer;
+            svg{
+                width: 18px !important;
+                height: 18px !important;
+                fill: #90A4AE !important;
+            }
+        }
+        .counter{
+            margin-top : 3px;
+            color: gray;
+            align-self: center;
+        }
+    }
+}

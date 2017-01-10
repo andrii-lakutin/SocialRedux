@@ -18,7 +18,7 @@ class RegistrationForm extends Component {
         return (
             <div className="RegisterFormComponent">
                 <h1>Create an Account</h1>
-                <form method="post" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <Field name="firstName" component={TextField} hintText="First Name" validate={[required]} maxLength={20}/>
                     <Field name="lastName" component={TextField} hintText="Last Name" validate={[required]} maxLength={20}/>
                     <Field name="email" component={TextField} hintText="Email" type="email" validate={[ required, email ]}/>
@@ -37,7 +37,7 @@ class RegistrationForm extends Component {
 }
 
 RegistrationForm.propTypes = {
-    handleSubmitForm: PropTypes.func,
+    handleSubmit: PropTypes.func,
 };
 
 RegistrationForm = reduxForm({

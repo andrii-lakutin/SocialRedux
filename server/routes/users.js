@@ -23,6 +23,26 @@ router.route('/personal/:userId')
         });
     });
 
+router.route('/personal/:userId')
+    .post(function (req, res) {
+        let userId = req.params.userId;
+
+        let dataForUpdate = {};
+        dataForUpdate[req.body.field] = req.body.newValue;
+
+        PersonalPage.findOneAndUpdate(
+            { owner: userId },   
+            { $set: dataForUpdate },
+            { new: true },
+            function (err, user) {
+                if (err) {
+                    createError("User not found!", 404, res);
+                } else {
+                    res.status(200).json({ status: "Success!", user });
+                }
+            });
+    });
+
 //         let userId = req.params.userId;
 //         var personal = new PersonalPage({
 //             firstName: "Dovakin",
