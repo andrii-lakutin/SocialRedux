@@ -16,7 +16,7 @@ var PersonalPage = mongoose.model('PersonalPage', new Schema({
     avatarUrl: String,
     headerUrl: String,
     owner: {type: String, unique: true},
-    posts: [], // add schema of post
+    posts: [], 
     friends: [String]
 }));
 

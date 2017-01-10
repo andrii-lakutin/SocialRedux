@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {reset} from 'redux-form';
 
 import { Tabs, Tab } from 'material-ui/Tabs';
 import Posts from 'material-ui/svg-icons/action/subject';
@@ -15,11 +16,12 @@ import { submitPostMsg } from "../actions/data.actions";
 class Navigation extends Component {
 
     postMsg(values){
-        const { handleSubmitPostMsg, currentPage } = this.props;
+        const { handleSubmitPostMsg, currentPage, handleResetForm } = this.props;
         const msg = values.message;
         const from = currentPage.owner;
         const fullName = `${currentPage.firstName} ${currentPage.lastName}`
         handleSubmitPostMsg(msg, from, fullName);
+        handleResetForm('PostCreator');
     }
 
     render() {
@@ -60,7 +62,8 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
     posts: PropTypes.array,
-    handleSubmitPostMsg: PropTypes.func
+    handleSubmitPostMsg: PropTypes.func,
+    handleResetForm: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -70,7 +73,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownPorps) => ({
     ...ownPorps,
-    handleSubmitPostMsg: bindActionCreators(submitPostMsg, dispatch)
+    handleSubmitPostMsg: bindActionCreators(submitPostMsg, dispatch),
+    handleResetForm: bindActionCreators(reset, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
