@@ -23,8 +23,8 @@ class Login extends Component {
             email: values.email,
             password: values.password,
         }
-        this.props.handleSubmitForm(`/auth/login`, data);
-        this.props.checkSessions(`/users/personal`);
+        this.props.handleSubmitForm(`http://localhost:3000/auth/login`, data);
+        this.props.checkSessions(`http://localhost:3000/users/personal`);
     }
 
     render() {

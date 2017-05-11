@@ -4,18 +4,18 @@ class Avatar extends Component {
     render() {
         const { url } = this.props;
 
-        const Avatar = {
+        const AvatarStyles = {
             backgroundImage: `url(${url})`,
         };
 
         return (
-            <div className="AvatarComponent" style={Avatar}></div>
+            <div className="AvatarComponent" style={AvatarStyles}></div>
         );
     }
 }
 
 Avatar.propTypes = {
-    url: PropTypes.string
+    url: PropTypes.string,
 };
 
 export default Avatar;

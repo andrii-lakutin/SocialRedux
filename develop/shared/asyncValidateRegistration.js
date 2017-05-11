@@ -1,5 +1,5 @@
 const asyncValidate = (values) => {
-    return fetch("/auth/register",
+    return fetch("http://localhost:3000/auth/register",
         {
             method: 'POST',
             credentials: 'include',

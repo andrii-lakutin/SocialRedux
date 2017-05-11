@@ -2,17 +2,18 @@ import express from 'express';
 import User from "../schemas/user";
 import createError from '../shared/createError';
 import bcrypt from 'bcryptjs';
-import csrf from 'csurf';
+// import csrf from 'csurf';
 
 let router = express.Router();
 
 router.route('/register')
   .post(function (req, res) {
+
     var user = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+      password: req.body.password ? bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)) : null
     });
     if (!req.body.readOnly) {
       user.save(function (err) {
@@ -32,7 +33,7 @@ router.route('/register')
         if (!user) {
           res.status(200).json({ status: "Success!" });
         } else {
-          createError("That email is already taken, try another", 422, res);  
+          createError("That email is already taken, try another", 422, res);
         }
       });
     }

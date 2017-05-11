@@ -15,8 +15,8 @@ import { getPersonalInfo, getPosts, personalChange } from "../actions/data.actio
 class PersonalPage extends Component {
 
     componentWillMount() {
-        this.props.checkSessions('/users/personal');
-        this.props.loadInfo(`/users/personal/${this.props.params.userId}`);
+        this.props.checkSessions('http://localhost:3000/users/personal');
+        this.props.loadInfo(`http://localhost:3000/users/personal/${this.props.params.userId}`);
     }
 
     componentDidUpdate() {
@@ -27,7 +27,7 @@ class PersonalPage extends Component {
     }
 
     logout() {
-        this.props.handleLogout('/auth/logout');
+        this.props.handleLogout('http://localhost:3000/auth/logout');
     }
 
     login() {

@@ -163,10 +163,8 @@ export function login(url, data) {
 export function isInSession(url) {
   return (dispatch) => {
     dispatch(sessionsIsLoading(true));
-
     fetch(url, {
       credentials: 'include',
-      mode: 'no-cors'
     })
       .then((response) => {
         if (!response.ok) {
@@ -189,7 +187,6 @@ export function logout(url) {
 
     fetch(url, {
       credentials: 'include',
-      mode: 'no-cors'
     })
       .then((response) => {
         if (!response.ok) {

@@ -46,7 +46,7 @@ function personalChangeHasErrored(err) {
 
 export function personalChange(field, newValue, currentPageOwner){
     return (dispatch) => {
-    fetch(`/users/personal/${currentPageOwner}`, {
+    fetch(`http://localhost:3000/users/personal/${currentPageOwner}`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -85,7 +85,7 @@ function submitPostMsgHasErrored(err) {
 
 export function submitPostMsg(msg, from, fullName){
   return (dispatch) => {
-    fetch(`/posts/user/${from}`, {
+    fetch(`http://localhost:3000/posts/user/${from}`, {
         method: 'POST',
         credentials: 'include',
         headers: {

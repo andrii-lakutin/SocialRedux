@@ -3,7 +3,7 @@
   "rules": {
     "indent": [2, 4, {"SwitchCase": 1}],
     "no-use-before-define": ["error", { "functions": false, "classes": false }],
-    "no-param-reassign": [2, {props: false}],
+    "no-param-reassign": [2, {"props": false}],
 
     // Legacy
     "max-len": [2, 120, 4, { "ignoreComments": true, "ignoreUrls": true }],

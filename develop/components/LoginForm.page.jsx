@@ -9,7 +9,7 @@ import asyncValidate from '../shared/asyncValidateLogin';
 const required = value => (!value) ? 'Required' : "";
 const email = value => value &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email' : "";
-const minLength = value => (value.length < 9) ? 'Password must have at least 8 characters' : "";
+const minLength = value => (value.length < 8) ? 'Password must have at least 8 characters' : "";
 
 class LoginForm extends Component {
 
@@ -33,7 +33,6 @@ class LoginForm extends Component {
                         label="First time here?"
                         backgroundColor="orange"
                         labelColor="white"
-                        disabled={pristine || submitting}
                         />
                 </Link>
             </div>
